@@ -1,0 +1,50 @@
+
+body {
+    background-color: #f0f0f0;
+    margin-bottom: 100px;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.wanted, .required {
+    margin: 20px 0px;
+}
+
+.dropdown-toggle {
+    margin: 20px 0px;
+}
+
+li > label {
+    margin-left: 20px;
+}
+
+.skills-interest__title {
+    display: inline;
+    width: 300px;
+    color: rgb(90, 90, 90);
+    margin-left: 10px;
+}
+
+.skills-interest__section {
+    margin: 10px 0px;
+}
+.skills__title {
+    margin-right: 19px;
+}
+
+.skills-interest {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.submit-form__button {
+    margin: 20px 0px;
+}
+
+.cointainer-section {
+    margin: 20px 0px 40px 0px;
+}

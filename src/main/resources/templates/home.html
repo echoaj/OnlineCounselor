@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <title>Online Councilor</title>
+</head>
+
+<!-- 
+    A BEM class name includes up to three parts.
+
+Block: The outermost parent element of the component is defined as the block.
+Element: Inside of the component may be one or more children called elements.
+Modifier: Either a block or element may have a variation signified by a modifier.
+If all three are used in a name it would look something like this:
+
+[block]__[element]--[modifier]
+ -->
+
+<body>
+    <h1>Welcome to the Online Councilor</h1>
+
+
+    <h2 th:text="${my_var}"></h2>
+
+    <form class="container" action="." method="POST">
+
+        <div class="cointainer-section">
+            <h4>General information</h4>
+            <div class="input-group input-group-sm mb-3 w-25">
+                <span class="input-group-text" id="inputGroup-sizing-sm-fname">First Name</span>
+                <input type="text" name="fname" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm-fname">
+            </div>
+            <div class="input-group input-group-sm mb-3 w-25">
+                <span class="input-group-text" id="inputGroup-sizing-sm-lname">Last Name</span>
+                <input type="text" name="lname" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm-lname">
+            </div>
+            <div class="input-group input-group-sm mb-3 w-25">
+                <span class="input-group-text" id="inputGroup-sizing-sm-grade">Grade</span>
+                <input type="text" name="grade" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm-grade">
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="cointainer-section">
+            <h4>Required & Wanted Classes</h4>
+            <!-- 2) Enter your term length-->
+            <div>
+                <label for="form__input--term-length">Term Length</label>
+                <span id="form__span--term-length"></span>
+                <input type="range" name="termLength" min="2" max="4" value="2" id="form__input--term-length"
+                    onchange="rangeSlider(this.value, 'form__span--term-length')"
+                    onmousemove="rangeSlider(this.value, 'form__span--term-length')">
+            </div>
+
+            <!-- 2) Enter the # of periods in a day-->
+
+            <div>
+                <label for="form__input--num-periods"># of Periods in a Day</label>
+                <span id="form__span--num-periods"></span>
+                <input type="range" name="numPeriods" min="1" max="10" value="4" id="form__input--num-periods"
+                    onchange="rangeSlider(this.value, 'form__span--num-periods')"
+                    onmousemove="rangeSlider(this.value, 'form__span--num-periods')">
+            </div>
+            <!-- Required Classes -->
+            <div class="required">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requiredSubjects">
+                    Choose required subjects
+                </button>
+
+                <!-- Modal for required classes -->
+                <div class="modal fade" id="requiredSubjects" tabindex="-1" aria-labelledby="requiredSubjectsLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="requiredSubjectsLabel">Required Subject</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body" id="required-subjects__modal-body">
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success"
+                                    onclick="addRequiredSubjects()">Add</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="wanted">
+                <!-- model for wanted classes -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#wantedSubjects">
+                    Choose wanted classes
+                </button>
+
+                <div class="modal fade" id="wantedSubjects" tabindex="-1" aria-labelledby="wantedSubjectsLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="wantedSubjectsLabel">Wanted classes</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body" id="wanted-subjects__modal-body">
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" onclick="addWantedSubjectClasses()">Add</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group input-group-sm mb-3 w-25">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Free Periods</span>
+                <input type="text" name="freePeriod" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+        </div>
+
+
+        <hr>
+
+        <!-- Create 5 radio buttons with labels 1-5 -->
+        <div class="cointainer-section">
+            <h4>Skills & Interest</h4>
+
+            <ul class="skills-interest">
+
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="challenge__range cointainer-section w-25">
+            <h4>Rate the challenge you seek</h4>
+            <label for="challenge" class="form-label">Challenge</label>
+            <input type="range" name="challengeDesired" class="form-range" id="challenge" value="1" min="1" max="10"
+                oninput="this.nextElementSibling.value = this.value">
+            <output>1</output>
+        </div>
+
+        <!-- Submit Info Button -->
+        <input type="submit" class="btn btn-danger submit-form___button" name="submit" id="submit" value="submit">
+
+    </form>
+
+
+    <script th:src="@{/js/home.js}"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
