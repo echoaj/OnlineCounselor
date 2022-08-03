@@ -43,17 +43,13 @@ public class StudentController {
     }
 
     @PostMapping(value = { "/", "/home" })
-    public String form(@ModelAttribute Student student){
-        System.out.println("POST WORKED!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(student);
-        System.out.println(student.getFname());
-        System.out.println(student.getLname());
-        System.out.println(student.getGrade());
-        System.out.println("POST WORKED!!!!!!!!!!!!!!!!!!!!!");
-
-        this.scheduleService.getSchedule();
-        return "home";
+    public String form(@ModelAttribute Student student, Model model){
+        int[][] schedule = this.scheduleService.getSchedule();
+        model.addAttribute("schedule", schedule);
+        return "result";
     }
+
+
 
     // @RequestBody
 }
