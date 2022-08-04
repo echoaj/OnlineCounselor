@@ -15,28 +15,31 @@
 <body>
 
 
-    <h1>Result Page</h1>
+    <h1>Your Schedule</h1>
 
     <div class="container">
 
-        <!--    back button to home.html-->
-        <a class="btn btn-danger" href="/">Back</a>
 
         <!--    Loop through schedule-->
-        <table>
-            <tr>
-                <th>Period 1</th>
-                <th>Period 2</th>
-                <th>Period 3</th>
-                <th>Period 4</th>
-                <th>Period 5</th>
-            </tr>
+        <table class="table table-bordered mt-5">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Period 1</th>
+                    <th scope="col">Period 2</th>
+                    <th scope="col">Period 3</th>
+                    <th scope="col">Period 4</th>
+                    <th scope="col">Period 5</th>
+                </tr>
+            </thead>
+
             <tr th:each="course_list: ${schedule}">
                 <td th:each="course: ${course_list}">
                     <text th:text="${course}"></text>
                 </td>
             </tr>
         </table>
+        <!--    back button to home.html-->
+        <a class="btn btn-danger mt-3 btn-lg" href="/">Back</a>
 
 
     </div>
