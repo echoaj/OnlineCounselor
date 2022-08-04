@@ -17,6 +17,7 @@ public class StudentController {
 //    String[] subjects = {"Art", "Elective", "English", "Foreign Language", "Health", "History", "Math",  "PE", "Life Science", "Physical Science", "Science, But Type Does Not Matter"};
     Hashtable<String, String[]> subjects = new Hashtable<>();
     ScheduleService scheduleService;
+    private int[][] officialSchedule;
 
     private void initializeSubjects(){
         subjects.put("Art", new String[] {"Ceramics", "Drawing and Painting"});
@@ -29,7 +30,7 @@ public class StudentController {
         initializeSubjects();
     }
 
-    @GetMapping({ "/", "/home" })
+    @GetMapping(path={ "/", "/home" })
     public String home(Model model){
         System.out.println("|||||||||||||||||||***********Get Request***********||||||||||||||||||||");
         model.addAttribute("myVar", "Hello from controller");
@@ -42,13 +43,20 @@ public class StudentController {
         return "home";
     }
 
-    @PostMapping(value = { "/", "/home" })
-    public String form(@ModelAttribute Student student, Model model){
-        int[][] schedule = this.scheduleService.getSchedule();
-        model.addAttribute("schedule", schedule);
+    @PostMapping(path = { "/", "/result" })
+    public String formSubmit(@ModelAttribute Student student, Model model){
+        officialSchedule = this.scheduleService.getSchedule();
+        model.addAttribute("schedule", officialSchedule);
         return "result";
     }
 
+    @GetMapping(path = "/result")
+    public String resultPage(Model model){
+        model.addAttribute("schedule", officialSchedule);
+        return "result";
+    }
+
+//    Create post mapping that will return result.html at /result endpoint
 
 
     // @RequestBody
