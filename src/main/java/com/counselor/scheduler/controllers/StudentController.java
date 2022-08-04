@@ -30,7 +30,12 @@ public class StudentController {
         initializeSubjects();
     }
 
-    @GetMapping(path={ "/", "/home" })
+    @GetMapping("/")
+    public String welcome() {
+        return "welcome";
+    }
+
+    @GetMapping(path="/home" )
     public String home(Model model){
         System.out.println("|||||||||||||||||||***********Get Request***********||||||||||||||||||||");
         model.addAttribute("myVar", "Hello from controller");
@@ -43,7 +48,7 @@ public class StudentController {
         return "home";
     }
 
-    @PostMapping(path = { "/", "/result" })
+    @PostMapping(path ="/result")
     public String formSubmit(@ModelAttribute Student student, Model model){
         officialSchedule = this.scheduleService.getSchedule();
         model.addAttribute("schedule", officialSchedule);
